@@ -41,7 +41,6 @@ public class App
         	e.printStackTrace();
         }
         
-        
     }
 
 	private static void displayStudents(List<Student> students) {
