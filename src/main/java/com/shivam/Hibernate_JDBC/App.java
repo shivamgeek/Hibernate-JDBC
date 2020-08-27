@@ -28,9 +28,12 @@ public class App
         	System.out.println("Begin Transaction");
         	session.beginTransaction();
         	
-        	System.out.println("create the query");
-        	List<Student> students = session.createQuery("from Student where lastName='man' AND email LIKE '%man.com'").list();
-        	displayStudents(students);
+        	//Get student with ID 2
+        	
+        	Student temp = session.get(Student.class, 2);
+        	temp.setEmail("fooBar@foba.com");
+        	
+        	
         	System.out.println("Do commit the transaction");
         	session.getTransaction().commit();
         	System.out.println("Transaction completed");
