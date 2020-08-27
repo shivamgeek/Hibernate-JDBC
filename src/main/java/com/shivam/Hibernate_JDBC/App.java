@@ -16,37 +16,50 @@ import com.shivam.Hibernate_JDBC.Entity.Student;
  */
 public class App 
 {
+	static SessionFactory factory = null;
     public static void main( String[] args )
     {
 
-        SessionFactory factory = new Configuration()
+        factory = new Configuration()
         						.configure("hibernate_cfg.xml")
         						.addAnnotatedClass(Instructor.class).addAnnotatedClass(InstructorDetail.class)
         						.buildSessionFactory();
-        Session session = factory.getCurrentSession();
+        //Session session = factory.getCurrentSession();
         
         try {
-        	createAndSaveInstructor(session);
-        	
+        	Instructor temp = getInstructorWithId(11);
+        	deleteInstructor(temp);
+        	//createAndSaveInstructor();
         }catch(Exception e) {
         	e.printStackTrace();
         }
         
     }
     
-    static void createAndSaveInstructor(Session session) {
-    	Instructor instructor = new Instructor("Iron","man","ironman@hotmail.com");
-    	
-    	InstructorDetail idetail = new InstructorDetail("youtube.com/maniron","creating, building stuff");
-    	
-    	instructor.setDetail(idetail);
-    	
+    static void deleteInstructor(Instructor inst) {
+    	Session session = factory.getCurrentSession();
     	session.beginTransaction();
-    	
-    	session.save(instructor); //this should save idetail object as well due CASCADING.ALL
-    	
+    	session.delete(inst);
     	session.getTransaction().commit();
-    	
+    	System.out.println("Transaction committed");
+    }
+    
+    static Instructor getInstructorWithId(int id) {
+    	Session session = factory.getCurrentSession();
+    	session.beginTransaction();
+    	Instructor inst = session.get(Instructor.class, id);
+    	session.getTransaction().commit();
+    	return inst;
+    }
+    
+    static void createAndSaveInstructor() {
+    	Session session = factory.getCurrentSession();
+    	Instructor instructor = new Instructor("Iron","man","ironman@hotmail.com");
+    	InstructorDetail idetail = new InstructorDetail("youtube.com/maniron","creating, building stuff");
+    	instructor.setDetail(idetail);
+    	session.beginTransaction();
+    	session.save(instructor); //this should save idetail object as well due CASCADING.ALL
+    	session.getTransaction().commit();
     	System.out.println("Transaction committed");
     }
 
