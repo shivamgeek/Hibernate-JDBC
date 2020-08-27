@@ -28,12 +28,11 @@ public class App
         	System.out.println("Begin Transaction");
         	session.beginTransaction();
         	
-        	//Get student with ID 2
-        	
+        	//Get student with ID 2  	
         	Student temp = session.get(Student.class, 2);
-        	temp.setEmail("fooBar@foba.com");
         	
-        	session.createQuery("update Student set email='*@avengers.com' where lastName='man'").executeUpdate();
+        	session.delete(temp);
+        	//session.createQuery("delete from Student where id=2").executeUpdate();
         	
         	System.out.println("Do commit the transaction");
         	session.getTransaction().commit();
