@@ -68,5 +68,8 @@ public class Student {
 		this.email = email;
 	}
 
+	public String toString() {
+		return getFirstName()+" "+getLastName()+" , "+getEmail();
+	}
 	
 }
