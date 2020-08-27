@@ -25,12 +25,13 @@ public class App
         Session session = factory.getCurrentSession();
         
         try {
+        	System.out.println("Begin Transaction");
         	session.beginTransaction();
         	
-        	List<Student> students = session.createQuery("from Student").list();
-        	for(int i=0;i<students.size();i++) {
-        		System.out.println(students.get(i));
-        	}
+        	System.out.println("create the query");
+        	List<Student> students = session.createQuery("from Student where lastName='man' AND email LIKE '%man.com'").list();
+        	displayStudents(students);
+        	System.out.println("Do commit the transaction");
         	session.getTransaction().commit();
         	System.out.println("Transaction completed");
         }catch(Exception e) {
@@ -39,4 +40,14 @@ public class App
         
         
     }
+
+	private static void displayStudents(List<Student> students) {
+		System.out.println("Displaying Data +++++");
+		for(int i=0;i<students.size();i++) {
+			System.out.println(students.get(i));
+		}
+		System.out.println("Finish Data ----");
+	}
+    
+    
 }
