@@ -33,6 +33,7 @@ public class App
         	Student temp = session.get(Student.class, 2);
         	temp.setEmail("fooBar@foba.com");
         	
+        	session.createQuery("update Student set email='*@avengers.com' where lastName='man'").executeUpdate();
         	
         	System.out.println("Do commit the transaction");
         	session.getTransaction().commit();
