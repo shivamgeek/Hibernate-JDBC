@@ -27,9 +27,12 @@ public class App
         //Session session = factory.getCurrentSession();
         
         try {
-        	Instructor temp = getInstructorWithId(11);
-        	deleteInstructor(temp);
-        	//createAndSaveInstructor();
+        	InstructorDetail det = getInstructorDetailWithId(12);
+        	//Get Instructor data from detail object using bi-directional 1:1 mapping
+        	
+        	System.out.println("Instructor data with detail id 12 is "+det.getInstructor());
+        	
+        	
         }catch(Exception e) {
         	e.printStackTrace();
         }
@@ -50,6 +53,14 @@ public class App
     	Instructor inst = session.get(Instructor.class, id);
     	session.getTransaction().commit();
     	return inst;
+    }
+    
+    static InstructorDetail getInstructorDetailWithId(int id) {
+    	Session session = factory.getCurrentSession();
+    	session.beginTransaction();
+    	InstructorDetail det = session.get(InstructorDetail.class, id);
+    	session.getTransaction().commit();
+    	return det;
     }
     
     static void createAndSaveInstructor() {
