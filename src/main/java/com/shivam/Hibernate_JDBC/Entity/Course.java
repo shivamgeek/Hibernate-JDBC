@@ -3,6 +3,7 @@ package com.shivam.Hibernate_JDBC.Entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +30,10 @@ public class Course {
 	@ManyToOne(cascade= {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	private Instructor instructor;
 
+	public Course() {
+		
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -55,7 +60,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", title=" + title + ", instructor=" + instructor + "]";
+		return "Course [id=" + id + ", title=" + title + "]";
 	}
 
 	public Course(String title) {

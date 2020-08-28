@@ -33,7 +33,7 @@ public class Instructor {
 	@Column(name="email")
 	private String email;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="instructor_detail_id")
 	private InstructorDetail detail;
 	
@@ -95,12 +95,14 @@ public class Instructor {
 		this.email = email;
 	}
 
+
+	
 	@Override
 	public String toString() {
 		return "Instructor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", detail=" + detail + "]";
 	}
-	
+
 	public Instructor() {
 		
 	}

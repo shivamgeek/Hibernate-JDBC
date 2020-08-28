@@ -28,9 +28,16 @@ public class App
         //Session session = factory.getCurrentSession();
         
         try {
+        	int id = 25;
+        	Session session = factory.getCurrentSession();
+        	session.beginTransaction();
+        	Instructor inst = session.get(Instructor.class, id);
         	
-        	int id = createAndSaveInstructor();
-        	addCoursesToInstructor(id);
+        	System.out.println(inst);
+        	System.out.println("$$$$$$$$");
+        	System.out.println(inst.getDetail());
+        	session.getTransaction().commit();
+        	session.close();
         	
         	
         }catch(Exception e) {
@@ -89,8 +96,8 @@ public class App
     	Instructor inst = getInstructorWithId(inst_id);
     	Session session = factory.getCurrentSession();
     	session.beginTransaction();
-    	Course c1 = new Course("Engineering");
-    	Course c2 = new Course("Physics");
+    	Course c1 = new Course("Engineering4");
+    	Course c2 = new Course("Physics0");
     	inst.addCourse(c1);
     	inst.addCourse(c2);
     	session.save(c1);
