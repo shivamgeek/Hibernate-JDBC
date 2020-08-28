@@ -39,3 +39,8 @@ create table course(
 	unique key(title),
 	foreign key(instructor_id) references instructor(id)
 )
+
+SET SQL_SAFE_UPDATES = 0;
+delete from course;
+delete from instructor;
+delete from instructor_details;
