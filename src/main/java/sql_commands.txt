@@ -1,6 +1,6 @@
 use student_database;
 
-create table student_table(
+create table student_table(  
 	id int(11) not null auto_increment,
     first_name varchar(45) default null,
     last_name varchar(45) default null,
@@ -31,3 +31,11 @@ create table instructor(
 	foreign key(instructor_detail_id) references instructor_details(id)
 )
 
+create table course(
+	id int not null auto_increment,
+	title varchar(45) default null,
+	instructor_id int default null,
+	primary key(id),
+	unique key(title),
+	foreign key(instructor_id) references instructor(id)
+)

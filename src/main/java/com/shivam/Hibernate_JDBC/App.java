@@ -27,14 +27,14 @@ public class App
         //Session session = factory.getCurrentSession();
         
         try {
-        	InstructorDetail det = getInstructorDetailWithId(12);
-        	//Get Instructor data from detail object using bi-directional 1:1 mapping
-        	
-        	System.out.println("Instructor data with detail id 12 is "+det.getInstructor());
+        	InstructorDetail det = getInstructorDetailWithId(17);
+        	deleteInstructorDetail(det);
         	
         	
         }catch(Exception e) {
         	e.printStackTrace();
+        }finally {
+        	factory.close();
         }
         
     }
@@ -43,6 +43,14 @@ public class App
     	Session session = factory.getCurrentSession();
     	session.beginTransaction();
     	session.delete(inst);
+    	session.getTransaction().commit();
+    	System.out.println("Transaction committed");
+    }
+    
+    static void deleteInstructorDetail(InstructorDetail det) {
+    	Session session = factory.getCurrentSession();
+    	session.beginTransaction();
+    	session.delete(det);
     	session.getTransaction().commit();
     	System.out.println("Transaction committed");
     }
@@ -63,7 +71,7 @@ public class App
     	return det;
     }
     
-    static void createAndSaveInstructor() {
+    static int createAndSaveInstructor() {
     	Session session = factory.getCurrentSession();
     	Instructor instructor = new Instructor("Iron","man","ironman@hotmail.com");
     	InstructorDetail idetail = new InstructorDetail("youtube.com/maniron","creating, building stuff");
@@ -72,6 +80,7 @@ public class App
     	session.save(instructor); //this should save idetail object as well due CASCADING.ALL
     	session.getTransaction().commit();
     	System.out.println("Transaction committed");
+    	return instructor.getId();
     }
 
     
