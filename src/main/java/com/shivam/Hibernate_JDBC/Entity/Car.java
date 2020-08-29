@@ -20,6 +20,7 @@ public class Car {
 	@Column(name="brand")
 	private String brand;
 	
+	@OneToOne
 	Person carOwner;
 
 	public int getId() {
