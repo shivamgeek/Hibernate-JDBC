@@ -40,6 +40,20 @@ create table course(
 	foreign key(instructor_id) references instructor(id)
 )
 
+create table car(
+	id int not null auto_increment,
+	brand varchar(45) default null,
+	primary key(id)
+);
+
+create table Person(
+	id int not null auto_increment,
+	first_name varchar(45) default null,
+	car_id int default null,
+	primary key(id),
+	foreign key(car_id) references car(id)
+);
+
 SET SQL_SAFE_UPDATES = 0;
 delete from course;
 delete from instructor;
